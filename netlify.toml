@@ -1,5 +1,5 @@
 [build]
-  publish = "."
+  publish = "deploy"
 
 [[headers]]
   for = "/assets/*.mp4"

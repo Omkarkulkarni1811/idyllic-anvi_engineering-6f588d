@@ -1,0 +1,248 @@
+const yearEl = document.getElementById("year");
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+const scrollProgress = document.getElementById("scrollProgress");
+const revealEls = document.querySelectorAll(".reveal");
+const cursorGlow = document.querySelector(".cursor-glow");
+const metricNumbers = document.querySelectorAll(".metric-number");
+const magneticEls = document.querySelectorAll(".magnetic");
+const usageMainImage = document.getElementById("usageMainImage");
+const usageCaption = document.getElementById("usageCaption");
+const usageThumbs = Array.from(document.querySelectorAll("#usageThumbs .thumb"));
+const usagePrev = document.getElementById("usagePrev");
+const usageNext = document.getElementById("usageNext");
+const testimonialSlider = document.getElementById("testimonialSlider");
+const testimonialCards = Array.from(document.querySelectorAll(".testimonial-card"));
+const testimonialDots = Array.from(document.querySelectorAll("#testimonialDots .dot"));
+const mediaOpenImages = document.querySelectorAll(".media-open");
+const experienceVideoWraps = Array.from(
+  document.querySelectorAll("#experience .video-wrap")
+);
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxClose = document.getElementById("lightboxClose");
+const forcedMutedVideos = document.querySelectorAll(
+  '#experience video[data-force-muted="true"]'
+);
+
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+  });
+
+  navMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => navMenu.classList.remove("open"));
+  });
+}
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
+
+revealEls.forEach((el) => observer.observe(el));
+
+window.addEventListener("scroll", () => {
+  if (!scrollProgress) {
+    return;
+  }
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const scrollHeight =
+    document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  scrollProgress.style.width = `${progress}%`;
+});
+
+window.addEventListener("mousemove", (event) => {
+  if (!cursorGlow) {
+    return;
+  }
+  cursorGlow.style.left = `${event.clientX}px`;
+  cursorGlow.style.top = `${event.clientY}px`;
+});
+
+magneticEls.forEach((el) => {
+  el.addEventListener("mousemove", (event) => {
+    const rect = el.getBoundingClientRect();
+    const x = event.clientX - rect.left - rect.width / 2;
+    const y = event.clientY - rect.top - rect.height / 2;
+    el.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
+  });
+  el.addEventListener("mouseleave", () => {
+    el.style.transform = "translate(0px, 0px)";
+  });
+});
+
+const countObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+      const el = entry.target;
+      const target = Number(el.dataset.target || "0");
+      const suffix = el.dataset.suffix || "";
+      const duration = 1100;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const value = Math.floor(target * progress);
+        el.textContent = `${value}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        }
+      };
+
+      requestAnimationFrame(tick);
+      countObserver.unobserve(el);
+    });
+  },
+  { threshold: 0.45 }
+);
+
+metricNumbers.forEach((el) => countObserver.observe(el));
+
+forcedMutedVideos.forEach((video) => {
+  video.muted = true;
+  video.volume = 0;
+  // Keep experience videos silent even if controls are used.
+  video.addEventListener("volumechange", () => {
+    if (!video.muted || video.volume !== 0) {
+      video.muted = true;
+      video.volume = 0;
+    }
+  });
+});
+
+experienceVideoWraps.forEach((wrap) => {
+  const video = wrap.querySelector("video");
+  if (!video) {
+    return;
+  }
+
+  const applyOrientation = () => {
+    if (!video.videoWidth || !video.videoHeight) {
+      return;
+    }
+    const isPortrait = video.videoHeight > video.videoWidth;
+    wrap.classList.toggle("portrait", isPortrait);
+    wrap.classList.toggle("landscape", !isPortrait);
+  };
+
+  if (video.readyState >= 1) {
+    applyOrientation();
+  }
+  video.addEventListener("loadedmetadata", applyOrientation);
+});
+
+const openLightbox = (src, alt = "") => {
+  if (!lightbox || !lightboxImage) {
+    return;
+  }
+  lightboxImage.src = src;
+  lightboxImage.alt = alt;
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden", "false");
+};
+
+if (usageMainImage && usageCaption && usageThumbs.length > 0) {
+  let activeIndex = 0;
+
+  const applyUsageSlide = (index) => {
+    activeIndex = (index + usageThumbs.length) % usageThumbs.length;
+    const activeThumb = usageThumbs[activeIndex];
+    usageMainImage.src = activeThumb.dataset.src || usageMainImage.src;
+    usageMainImage.alt = activeThumb.dataset.alt || usageMainImage.alt;
+    usageCaption.textContent = activeThumb.dataset.caption || "";
+    usageThumbs.forEach((thumb, i) => {
+      thumb.classList.toggle("active", i === activeIndex);
+    });
+  };
+
+  usageThumbs.forEach((thumb, i) => {
+    thumb.addEventListener("click", () => applyUsageSlide(i));
+  });
+
+  if (usagePrev) {
+    usagePrev.addEventListener("click", () => applyUsageSlide(activeIndex - 1));
+  }
+
+  if (usageNext) {
+    usageNext.addEventListener("click", () => applyUsageSlide(activeIndex + 1));
+  }
+
+  usageMainImage.addEventListener("click", () =>
+    openLightbox(usageMainImage.src, usageMainImage.alt)
+  );
+
+  if (lightbox && lightboxClose) {
+    lightboxClose.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+    });
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (!lightbox || !lightbox.classList.contains("open")) {
+      return;
+    }
+    if (event.key === "Escape") {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+    }
+  });
+}
+
+mediaOpenImages.forEach((img) => {
+  img.addEventListener("click", () => openLightbox(img.src, img.alt));
+});
+
+if (testimonialSlider && testimonialCards.length > 0 && testimonialDots.length > 0) {
+  let activeTestimonial = 0;
+  let sliderTimer;
+
+  const applyTestimonial = (index) => {
+    activeTestimonial = (index + testimonialCards.length) % testimonialCards.length;
+    testimonialCards.forEach((card, i) => {
+      card.classList.toggle("active", i === activeTestimonial);
+    });
+    testimonialDots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === activeTestimonial);
+    });
+  };
+
+  const restartSlider = () => {
+    clearInterval(sliderTimer);
+    sliderTimer = setInterval(() => {
+      applyTestimonial(activeTestimonial + 1);
+    }, 4200);
+  };
+
+  testimonialDots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      applyTestimonial(i);
+      restartSlider();
+    });
+  });
+
+  testimonialSlider.addEventListener("mouseenter", () => clearInterval(sliderTimer));
+  testimonialSlider.addEventListener("mouseleave", restartSlider);
+  restartSlider();
+}
