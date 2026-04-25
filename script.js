@@ -24,6 +24,9 @@ const lightboxClose = document.getElementById("lightboxClose");
 const forcedMutedVideos = document.querySelectorAll(
   '#experience video[data-force-muted="true"]'
 );
+const inquiryForm = document.getElementById("inquiryForm");
+const inquiryStatus = document.getElementById("inquiryStatus");
+const inquirySubmitBtn = document.getElementById("inquirySubmitBtn");
 
 const ASSET_CDN_BASE =
   "https://cdn.jsdelivr.net/gh/Omkarkulkarni1811/idyllic-anvi_engineering-6f588d@main/assets/";
@@ -278,4 +281,53 @@ if (testimonialSlider && testimonialCards.length > 0 && testimonialDots.length >
   testimonialSlider.addEventListener("mouseenter", () => clearInterval(sliderTimer));
   testimonialSlider.addEventListener("mouseleave", restartSlider);
   restartSlider();
+}
+
+if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
+  inquiryForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(inquiryForm);
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      phone: String(formData.get("phone") || "").trim(),
+      requirement: String(formData.get("requirement") || "").trim(),
+    };
+
+    if (!payload.name || !payload.phone || !payload.requirement) {
+      inquiryStatus.textContent = "Please fill all fields before submitting.";
+      inquiryStatus.classList.add("error");
+      return;
+    }
+
+    inquirySubmitBtn.disabled = true;
+    inquiryStatus.textContent = "Sending inquiry...";
+    inquiryStatus.classList.remove("error");
+
+    try {
+      const response = await fetch("/.netlify/functions/create-inquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || "Failed to save inquiry");
+      }
+
+      inquiryForm.reset();
+      inquiryStatus.textContent =
+        "Thank you! Inquiry submitted successfully. We will contact you soon.";
+      inquiryStatus.classList.remove("error");
+    } catch (error) {
+      inquiryStatus.textContent =
+        "Inquiry could not be submitted right now. Please try again in a minute.";
+      inquiryStatus.classList.add("error");
+    } finally {
+      inquirySubmitBtn.disabled = false;
+    }
+  });
 }

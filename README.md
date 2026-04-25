@@ -18,3 +18,15 @@ Open `index.html` directly in your browser.
 
 For best local development experience in VS Code/Cursor, use a local server
 extension (like Live Server) and open the site from there.
+
+## Inquiry Database Setup (Netlify + Supabase)
+
+1. Create a Supabase project.
+2. Run SQL from `database/inquiries.sql` in the Supabase SQL editor.
+3. In Netlify site settings, add environment variables:
+   - `SUPABASE_URL` = your Supabase project URL
+   - `SUPABASE_SERVICE_ROLE_KEY` = your Supabase service role key (recommended), or
+   - `SUPABASE_PUBLISHABLE_KEY` = your Supabase publishable key
+4. Deploy the site on Netlify.  
+   The contact form now posts to `/.netlify/functions/create-inquiry` and stores
+   entries in `public.inquiries`.

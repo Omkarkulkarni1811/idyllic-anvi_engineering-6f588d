@@ -322,11 +322,19 @@
               mechanical solution.
             </p>
           </div>
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
-            <input type="text" placeholder="Your Name" required />
-            <input type="tel" placeholder="Mobile Number" required />
-            <textarea placeholder="Your Product Requirement" rows="4" required></textarea>
-            <button class="btn btn-primary magnetic" type="submit">Send Inquiry</button>
+          <form class="contact-form" id="inquiryForm">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="tel" name="phone" placeholder="Mobile Number" required />
+            <textarea
+              name="requirement"
+              placeholder="Your Product Requirement"
+              rows="4"
+              required
+            ></textarea>
+            <button class="btn btn-primary magnetic" id="inquirySubmitBtn" type="submit">
+              Send Inquiry
+            </button>
+            <p id="inquiryStatus" class="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </section>
