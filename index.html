@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    <div class="bg-orb orb-1" aria-hidden="true"></div>
+    <div class="bg-orb orb-2" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
     <header class="site-header">
       <div class="container nav-wrap">
@@ -47,28 +50,28 @@
               long-term trust for every customer.
             </p>
             <div class="hero-cta">
-              <a href="#products" class="btn btn-primary">Explore Products</a>
-              <a href="#experience" class="btn btn-secondary">Watch Demo</a>
+              <a href="#products" class="btn btn-primary magnetic">Explore Products</a>
+              <a href="#experience" class="btn btn-secondary magnetic">Watch Demo</a>
             </div>
             <div class="hero-metrics">
               <div>
-                <span>01</span>
+                <span class="metric-number" data-target="1" data-suffix="">01</span>
                 <p>First self-manufactured flagship product</p>
               </div>
               <div>
-                <span>100%</span>
+                <span class="metric-number" data-target="100" data-suffix="%">100%</span>
                 <p>Made and tested by Anvi Engineering</p>
               </div>
               <div>
-                <span>24/7</span>
+                <span class="metric-number" data-target="24" data-suffix="/7">24/7</span>
                 <p>Responsive support and service availability</p>
               </div>
             </div>
           </div>
           <div class="hero-media reveal">
             <img
-              src="assets/anvi-product-shot.jpg"
-              alt="Anvi Engineering Shegdi premium product shot"
+              src="assets/customer-photo.jpeg"
+              alt="Anvi Engineering Shegdi product image"
             />
           </div>
         </div>
@@ -88,7 +91,7 @@
           <div class="product-highlight reveal">
             <div class="product-image">
               <img
-                src="assets/anvi-client-use.jpg"
+                src="assets/customer-photo.jpeg"
                 alt="Client using Anvi Engineering Shegdi in kitchen"
               />
             </div>
@@ -151,14 +154,34 @@
               use.
             </p>
           </div>
-          <div class="video-wrap">
-            <video controls preload="metadata" poster="assets/anvi-product-shot.jpg">
-              <source
-                src="assets/anvi_engineering_product_1.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
+          <div class="video-grid">
+            <div class="video-wrap">
+              <video controls playsinline preload="metadata" poster="assets/anvi-product-shot.jpg">
+                <source
+                  src="assets/anvi_engineering_product_1.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="video-wrap">
+              <video controls muted data-force-muted="true" playsinline preload="metadata" poster="assets/customer-photo.jpeg">
+                <source
+                  src="assets/customer-experience-1.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="video-wrap">
+              <video controls muted data-force-muted="true" playsinline preload="metadata" poster="assets/customer-photo.jpeg">
+                <source
+                  src="assets/customer-experience-2.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         </div>
       </section>
@@ -180,7 +203,7 @@
             <figure class="carousel-stage">
               <img
                 id="usageMainImage"
-                src="assets/customer-usage/usage_focus_1.jpg"
+                src="assets/customer-usage/usage_real_1.jpg"
                 alt="Indian customer using Anvi Shegdi close-up"
               />
               <figcaption id="usageCaption">
@@ -195,28 +218,96 @@
           <div class="usage-thumbs" id="usageThumbs">
             <button
               class="thumb active"
-              data-src="assets/customer-usage/usage_focus_1.jpg"
+              data-src="assets/customer-usage/usage_real_1.jpg"
               data-alt="Indian customer using Anvi Shegdi close-up"
               data-caption="Real customer moment from product demo."
             >
-              <img src="assets/customer-usage/usage_focus_1.jpg" alt="" />
+              <img src="assets/customer-usage/usage_real_1.jpg" alt="" />
             </button>
             <button
               class="thumb"
-              data-src="assets/customer-usage/usage_focus_2.jpg"
+              data-src="assets/customer-usage/usage_real_2.jpg"
               data-alt="Indian person cooking on Anvi Shegdi"
               data-caption="Close-up crop to clearly show user interaction."
             >
-              <img src="assets/customer-usage/usage_focus_2.jpg" alt="" />
+              <img src="assets/customer-usage/usage_real_2.jpg" alt="" />
             </button>
             <button
               class="thumb"
-              data-src="assets/customer-usage/usage_focus_3.jpg"
+              data-src="assets/customer-usage/usage_real_3.jpg"
               data-alt="Family-side usage of Anvi Shegdi in kitchen"
               data-caption="Actual use-case captured from your own video."
             >
-              <img src="assets/customer-usage/usage_focus_3.jpg" alt="" />
+              <img src="assets/customer-usage/usage_real_3.jpg" alt="" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials section">
+        <div class="container reveal">
+          <div class="section-head">
+            <p class="eyebrow">Customer Voices</p>
+            <h2>What people like about Anvi Shegdi.</h2>
+            <p>
+              Real usage confidence comes from product stability, easy handling,
+              and reliable day-to-day cooking performance.
+            </p>
+          </div>
+          <div class="testimonial-slider" id="testimonialSlider">
+            <article class="testimonial-card active">
+              <p>
+                "Build quality is strong and the Shegdi feels reliable for daily
+                home use. Flame consistency is very good."
+              </p>
+              <h4>- Home Customer, Pune</h4>
+            </article>
+            <article class="testimonial-card">
+              <p>
+                "Design is practical and maintenance is easy. We trust Anvi
+                Engineering for long-term performance."
+              </p>
+              <h4>- Family User, Maharashtra</h4>
+            </article>
+            <article class="testimonial-card">
+              <p>
+                "Very stable operation and clean finish. Product experience feels
+                premium and dependable."
+              </p>
+              <h4>- Retail Client, Nashik</h4>
+            </article>
+            <div class="testimonial-dots" id="testimonialDots">
+              <button class="dot active" aria-label="Show testimonial 1"></button>
+              <button class="dot" aria-label="Show testimonial 2"></button>
+              <button class="dot" aria-label="Show testimonial 3"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="all-media section">
+        <div class="container reveal">
+          <div class="section-head">
+            <p class="eyebrow">Complete Media Collection</p>
+            <h2>All photos and videos shared by you.</h2>
+            <p>
+              This section includes every key media file you provided so your
+              website shows your full real product story.
+            </p>
+          </div>
+          <div class="all-media-grid">
+            <img class="media-open" src="assets/customer-photo.jpeg" alt="Customer shared product image" />
+            <img class="media-open" src="assets/anvi-product-shot.jpg" alt="Anvi product view from demo video" />
+            <img class="media-open" src="assets/anvi-client-use.jpg" alt="Client side product usage from demo video" />
+            <img class="media-open" src="assets/customer-usage/usage_focus_1.jpg" alt="Customer focus shot one" />
+            <img class="media-open" src="assets/customer-usage/usage_focus_2.jpg" alt="Customer focus shot two" />
+            <img class="media-open" src="assets/customer-usage/usage_focus_3.jpg" alt="Customer focus shot three" />
+            <img class="media-open" src="assets/customer-usage/usage_real_1.jpg" alt="Real usage frame one" />
+            <img class="media-open" src="assets/customer-usage/usage_real_2.jpg" alt="Real usage frame two" />
+            <img class="media-open" src="assets/customer-usage/usage_real_3.jpg" alt="Real usage frame three" />
+            <img class="media-open" src="assets/customer-usage/usage_real_4.jpg" alt="Real usage frame four" />
+            <img class="media-open" src="assets/customer-usage/usage_real_5.jpg" alt="Real usage frame five" />
+            <img class="media-open" src="assets/customer-usage/usage_real_6.jpg" alt="Real usage frame six" />
           </div>
         </div>
       </section>
@@ -235,7 +326,7 @@
             <input type="text" placeholder="Your Name" required />
             <input type="tel" placeholder="Mobile Number" required />
             <textarea placeholder="Your Product Requirement" rows="4" required></textarea>
-            <button class="btn btn-primary" type="submit">Send Inquiry</button>
+            <button class="btn btn-primary magnetic" type="submit">Send Inquiry</button>
           </form>
         </div>
       </section>

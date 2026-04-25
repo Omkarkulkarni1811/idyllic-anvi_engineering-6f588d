@@ -23,6 +23,43 @@ body {
   color: var(--text);
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #6aa2ff, #8cd0ff);
+  z-index: 1400;
+}
+
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.orb-1 {
+  width: 280px;
+  height: 280px;
+  background: #3f82ff;
+  top: 12%;
+  right: 3%;
+  animation: floatOrb 10s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 240px;
+  height: 240px;
+  background: #2ed2b6;
+  bottom: 8%;
+  left: 2%;
+  animation: floatOrb 13s ease-in-out infinite;
+}
+
 img,
 video {
   max-width: 100%;
@@ -154,6 +191,11 @@ h2 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
 }
 
 .btn-primary {
@@ -197,6 +239,12 @@ h2 {
   border-radius: 24px;
   border: 1px solid #ffffff1f;
   box-shadow: 0 20px 50px #00000066;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-media img:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 26px 62px #00000080;
 }
 
 .section-head {
@@ -246,6 +294,12 @@ h2 {
   border-radius: 16px;
   border: 1px solid #ffffff1c;
   background: var(--card);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #7ca8ff7d;
 }
 
 .card p {
@@ -295,6 +349,44 @@ h2 {
   border-radius: 18px;
   border: 1px solid #ffffff1c;
   background: #000;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  min-height: 220px;
+  width: 100%;
+}
+
+.video-wrap:hover {
+  transform: translateY(-4px);
+  border-color: #6e95ea7a;
+}
+
+.video-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-wrap.landscape {
+  aspect-ratio: 16 / 9;
+}
+
+.video-wrap.portrait {
+  aspect-ratio: 9 / 16;
+  width: min(420px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  max-height: none;
 }
 
 .usage-gallery {
@@ -368,6 +460,59 @@ h2 {
   object-fit: cover;
 }
 
+.testimonials {
+  padding-top: 24px;
+}
+
+.testimonial-slider {
+  border: 1px solid #ffffff21;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0f1830, #0a1224);
+  padding: 1.2rem;
+}
+
+.testimonial-card {
+  display: none;
+  min-height: 120px;
+}
+
+.testimonial-card.active {
+  display: block;
+  animation: fadeUp 0.35s ease;
+}
+
+.testimonial-card p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #e5ecff;
+  margin-top: 0;
+}
+
+.testimonial-card h4 {
+  margin-bottom: 0;
+  color: #8fb6ff;
+}
+
+.testimonial-dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: #6c7fa8;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #9bc0ff;
+  box-shadow: 0 0 0 4px #9bc0ff22;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
@@ -402,6 +547,28 @@ h2 {
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
+}
+
+.all-media-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.all-media-grid img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #ffffff1f;
+  background: #0b1326;
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.all-media-grid img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px #0000005a;
 }
 
 .contact-box {
@@ -460,6 +627,27 @@ h2 {
   transform: translateY(0);
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
 @media (max-width: 900px) {
   .hero-grid,
   .product-highlight,
@@ -475,6 +663,22 @@ h2 {
   }
 
   .usage-carousel {
+    grid-template-columns: 1fr;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-wrap,
+  .video-wrap.landscape,
+  .video-wrap.portrait {
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+    max-height: none;
+  }
+
+  .all-media-grid {
     grid-template-columns: 1fr;
   }
 
