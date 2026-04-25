@@ -25,6 +25,39 @@ const forcedMutedVideos = document.querySelectorAll(
   '#experience video[data-force-muted="true"]'
 );
 
+const ASSET_CDN_BASE =
+  "https://cdn.jsdelivr.net/gh/Omkarkulkarni1811/idyllic-anvi_engineering-6f588d@main/assets/";
+
+const resolveAssetUrl = (value) => {
+  if (!value || !value.startsWith("assets/")) {
+    return value;
+  }
+  return `${ASSET_CDN_BASE}${value.replace(/^assets\//, "")}`;
+};
+
+const remapMediaAttributesToCdn = () => {
+  document.querySelectorAll('[src^="assets/"]').forEach((el) => {
+    const src = el.getAttribute("src");
+    el.setAttribute("src", resolveAssetUrl(src));
+  });
+
+  document.querySelectorAll('[poster^="assets/"]').forEach((el) => {
+    const poster = el.getAttribute("poster");
+    el.setAttribute("poster", resolveAssetUrl(poster));
+  });
+
+  document.querySelectorAll('[data-src^="assets/"]').forEach((el) => {
+    const dataSrc = el.getAttribute("data-src");
+    el.setAttribute("data-src", resolveAssetUrl(dataSrc));
+  });
+
+  document.querySelectorAll("video").forEach((video) => {
+    video.load();
+  });
+};
+
+remapMediaAttributesToCdn();
+
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
