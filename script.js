@@ -291,10 +291,11 @@ if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
     const payload = {
       name: String(formData.get("name") || "").trim(),
       phone: String(formData.get("phone") || "").trim(),
+      address: String(formData.get("address") || "").trim(),
       requirement: String(formData.get("requirement") || "").trim(),
     };
 
-    if (!payload.name || !payload.phone || !payload.requirement) {
+    if (!payload.name || !payload.phone || !payload.address || !payload.requirement) {
       inquiryStatus.textContent = "Please fill all fields before submitting.";
       inquiryStatus.classList.add("error");
       return;

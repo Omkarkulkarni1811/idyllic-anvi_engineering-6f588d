@@ -51,13 +51,19 @@ exports.handler = async (event) => {
 
   const name = String(payload.name || "").trim();
   const phone = String(payload.phone || "").trim();
+  const address = String(payload.address || "").trim();
   const requirement = String(payload.requirement || "").trim();
 
-  if (!name || !phone || !requirement) {
+  if (!name || !phone || !address || !requirement) {
     return jsonResponse(400, { error: "All fields are required" }, origin);
   }
 
-  if (name.length > 120 || phone.length > 40 || requirement.length > 4000) {
+  if (
+    name.length > 120 ||
+    phone.length > 40 ||
+    address.length > 500 ||
+    requirement.length > 4000
+  ) {
     return jsonResponse(400, { error: "Input too long" }, origin);
   }
 
@@ -74,6 +80,7 @@ exports.handler = async (event) => {
         {
           name,
           phone,
+          address,
           requirement,
           source: "website",
         },
