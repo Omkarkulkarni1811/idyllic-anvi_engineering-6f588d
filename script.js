@@ -38,6 +38,8 @@ const cartHomeQty = document.getElementById("cartHomeQty");
 const cartCommercialQty = document.getElementById("cartCommercialQty");
 const cartTotalQty = document.getElementById("cartTotalQty");
 const cartLineButtons = Array.from(document.querySelectorAll(".line-btn"));
+const inquiryCartSummary = document.getElementById("inquiryCartSummary");
+const scrollToCartLink = document.getElementById("scrollToCartLink");
 const usageTypeInput = inquiryForm?.querySelector('input[name="usage_type"]');
 const quantityRequiredInput = inquiryForm?.querySelector(
   'input[name="quantity_required"]'
@@ -326,6 +328,15 @@ if (addCartButtons.length > 0 && cartSummaryText) {
     cartSummaryText.textContent =
       parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items added yet.";
 
+    if (inquiryCartSummary) {
+      inquiryCartSummary.textContent =
+        parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items selected yet.";
+    }
+
+    if (scrollToCartLink) {
+      scrollToCartLink.textContent = parts.length > 0 ? "Update selection" : "Go to top cart";
+    }
+
     if (cartToggleBtn) {
       cartToggleBtn.textContent = `Cart (${total})`;
     }
@@ -433,6 +444,14 @@ if (addCartButtons.length > 0 && cartSummaryText) {
   }
 
   updateCartSummary();
+}
+
+if (scrollToCartLink) {
+  scrollToCartLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    const section = document.getElementById("orderCartSection");
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
 if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
