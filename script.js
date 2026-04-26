@@ -329,13 +329,13 @@ if (addCartButtons.length > 0 && cartSummaryText) {
 
     const parts = [];
     if (cart.home > 0) {
-      parts.push(`Home: ${cart.home}`);
+      parts.push(`Home Shegdi: ${cart.home}`);
     }
     if (cart.commercial > 0) {
-      parts.push(`Commercial: ${cart.commercial}`);
+      parts.push(`Commercial Shegdi: ${cart.commercial}`);
     }
     if (cart.industrial > 0) {
-      parts.push(`Industrial: ${cart.industrial}`);
+      parts.push(`Industrial Oil Skimmer: ${cart.industrial}`);
     }
     cartSummaryText.textContent =
       parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items added yet.";
