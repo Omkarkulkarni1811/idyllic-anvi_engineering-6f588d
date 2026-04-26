@@ -413,6 +413,28 @@ h2 {
   gap: 0.6rem;
 }
 
+.inquiry-order-builder {
+  border: 1px solid #ffffff1c;
+  border-radius: 12px;
+  padding: 0.85rem;
+  background: #0b1326;
+}
+
+.order-builder-title {
+  margin: 0 0 0.5rem;
+  color: #d6e1f8;
+  font-weight: 600;
+}
+
+.form-order-row {
+  margin-top: 0.6rem;
+}
+
+.order-builder-summary {
+  margin: 0.7rem 0 0.3rem;
+  color: #c8d4ee;
+}
+
 .card {
   padding: 1.2rem;
   border-radius: 16px;

@@ -38,10 +38,15 @@ const cartHomeQty = document.getElementById("cartHomeQty");
 const cartCommercialQty = document.getElementById("cartCommercialQty");
 const cartTotalQty = document.getElementById("cartTotalQty");
 const cartLineButtons = Array.from(document.querySelectorAll(".line-btn"));
-const usageTypeInput = inquiryForm?.querySelector('select[name="usage_type"]');
+const usageTypeInput = inquiryForm?.querySelector('input[name="usage_type"]');
 const quantityRequiredInput = inquiryForm?.querySelector(
   'input[name="quantity_required"]'
 );
+const productSelectionInput = inquiryForm?.querySelector(
+  'input[name="product_selection"]'
+);
+const formCartSummary = document.getElementById("formCartSummary");
+const clearFormCartBtn = document.getElementById("clearFormCartBtn");
 
 const ASSET_CDN_BASE =
   "https://cdn.jsdelivr.net/gh/Omkarkulkarni1811/idyllic-anvi_engineering-6f588d@main/assets/";
@@ -305,10 +310,12 @@ if (addCartButtons.length > 0 && cartSummaryText) {
   };
 
   const updateCartSummary = () => {
+    const total = cart.home + cart.commercial;
+
     if (cartHomeQty && cartCommercialQty && cartTotalQty) {
       cartHomeQty.textContent = String(cart.home);
       cartCommercialQty.textContent = String(cart.commercial);
-      cartTotalQty.textContent = String(cart.home + cart.commercial);
+      cartTotalQty.textContent = String(total);
     }
 
     const parts = [];
@@ -319,18 +326,43 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       parts.push(`Commercial: ${cart.commercial}`);
     }
     cartSummaryText.textContent =
-      parts.length > 0 ? `${parts.join(" | ")} (Total: ${cart.home + cart.commercial})` : "No items added yet.";
+      parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items added yet.";
 
     if (cartToggleBtn) {
-      cartToggleBtn.textContent = `Cart (${cart.home + cart.commercial})`;
+      cartToggleBtn.textContent = `Cart (${total})`;
+    }
+
+    if (formCartSummary) {
+      formCartSummary.textContent =
+        parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items selected.";
+    }
+
+    if (usageTypeInput && quantityRequiredInput && productSelectionInput) {
+      if (total < 1) {
+        usageTypeInput.value = "";
+        quantityRequiredInput.value = "";
+        productSelectionInput.value = "{}";
+      } else {
+        usageTypeInput.value =
+          cart.home > 0 && cart.commercial > 0
+            ? "mixed"
+            : cart.commercial > 0
+              ? "commercial"
+              : "home";
+        quantityRequiredInput.value = String(total);
+        productSelectionInput.value = JSON.stringify(cart);
+      }
     }
   };
 
   addCartButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const usageType = button.dataset.usageType || "";
-      const card = button.closest(".use-type-card");
-      const qtyInput = card?.querySelector(".order-qty-input");
+      const qtyInputId = button.dataset.qtyInputId || "";
+      const card = button.closest(".use-type-card, .inquiry-order-builder");
+      const qtyInput = qtyInputId
+        ? document.getElementById(qtyInputId)
+        : card?.querySelector(".order-qty-input");
       const quantity = Number.parseInt(String(qtyInput?.value || ""), 10);
 
       if (!["home", "commercial"].includes(usageType) || !Number.isInteger(quantity) || quantity < 1) {
@@ -387,10 +419,18 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       cart.home = 0;
       cart.commercial = 0;
       updateCartSummary();
-      if (usageTypeInput && quantityRequiredInput) {
-        usageTypeInput.value = "";
-        quantityRequiredInput.value = "";
+      if (inquiryStatus) {
+        inquiryStatus.textContent = "Selection cleared.";
+        inquiryStatus.classList.remove("error");
       }
+    });
+  }
+
+  if (clearFormCartBtn) {
+    clearFormCartBtn.addEventListener("click", () => {
+      cart.home = 0;
+      cart.commercial = 0;
+      updateCartSummary();
       if (inquiryStatus) {
         inquiryStatus.textContent = "Selection cleared.";
         inquiryStatus.classList.remove("error");
@@ -404,8 +444,7 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       if (total < 1) {
         return;
       }
-      usageTypeInput.value = cart.commercial > 0 ? "commercial" : "home";
-      quantityRequiredInput.value = String(total);
+      updateCartSummary();
       inquiryStatus.textContent = `Cart applied to inquiry. Total quantity: ${total}.`;
       inquiryStatus.classList.remove("error");
       inquiryForm?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -429,6 +468,7 @@ if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
         String(formData.get("quantity_required") || ""),
         10
       ),
+      productSelection: String(formData.get("product_selection") || "{}"),
       requirement: String(formData.get("requirement") || "").trim(),
     };
 
@@ -437,6 +477,7 @@ if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
       !payload.phone ||
       !payload.address ||
       !payload.usageType ||
+      payload.productSelection === "{}" ||
       !payload.requirement ||
       !Number.isInteger(payload.quantityRequired) ||
       payload.quantityRequired < 1

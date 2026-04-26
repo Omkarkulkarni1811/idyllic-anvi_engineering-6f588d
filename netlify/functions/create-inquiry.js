@@ -57,6 +57,21 @@ exports.handler = async (event) => {
   ).trim();
   const quantityRequiredRaw = payload.quantityRequired ?? payload.quantity_required;
   const quantityRequired = Number.parseInt(String(quantityRequiredRaw || ""), 10);
+  const productSelectionRaw =
+    payload.productSelection ?? payload.product_selection ?? "{}";
+  let productSelection;
+  try {
+    const parsed =
+      typeof productSelectionRaw === "string"
+        ? JSON.parse(productSelectionRaw)
+        : productSelectionRaw;
+    productSelection = {
+      home: Number.parseInt(String(parsed?.home || 0), 10) || 0,
+      commercial: Number.parseInt(String(parsed?.commercial || 0), 10) || 0,
+    };
+  } catch {
+    return jsonResponse(400, { error: "Invalid product selection" }, origin);
+  }
   const requirement = String(payload.requirement || "").trim();
 
   if (!name || !phone || !address || !usageType || !requirement) {
@@ -71,8 +86,12 @@ exports.handler = async (event) => {
     name.length > 120 ||
     phone.length > 40 ||
     address.length > 500 ||
-    !["home", "commercial"].includes(usageType) ||
+    !["home", "commercial", "mixed"].includes(usageType) ||
     quantityRequired > 10000 ||
+    productSelection.home < 0 ||
+    productSelection.commercial < 0 ||
+    productSelection.home + productSelection.commercial < 1 ||
+    productSelection.home + productSelection.commercial !== quantityRequired ||
     requirement.length > 4000
   ) {
     return jsonResponse(400, { error: "Input too long" }, origin);
@@ -94,6 +113,7 @@ exports.handler = async (event) => {
           address,
           usage_type: usageType,
           quantity_required: quantityRequired,
+          product_selection: JSON.stringify(productSelection),
           requirement,
           source: "website",
         },
