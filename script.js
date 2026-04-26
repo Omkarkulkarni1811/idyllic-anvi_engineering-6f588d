@@ -27,6 +27,13 @@ const forcedMutedVideos = document.querySelectorAll(
 const inquiryForm = document.getElementById("inquiryForm");
 const inquiryStatus = document.getElementById("inquiryStatus");
 const inquirySubmitBtn = document.getElementById("inquirySubmitBtn");
+const addCartButtons = Array.from(document.querySelectorAll(".add-cart-btn"));
+const clearCartBtn = document.getElementById("clearCartBtn");
+const cartSummaryText = document.getElementById("cartSummaryText");
+const usageTypeInput = inquiryForm?.querySelector('select[name="usage_type"]');
+const quantityRequiredInput = inquiryForm?.querySelector(
+  'input[name="quantity_required"]'
+);
 
 const ASSET_CDN_BASE =
   "https://cdn.jsdelivr.net/gh/Omkarkulkarni1811/idyllic-anvi_engineering-6f588d@main/assets/";
@@ -281,6 +288,70 @@ if (testimonialSlider && testimonialCards.length > 0 && testimonialDots.length >
   testimonialSlider.addEventListener("mouseenter", () => clearInterval(sliderTimer));
   testimonialSlider.addEventListener("mouseleave", restartSlider);
   restartSlider();
+}
+
+if (addCartButtons.length > 0 && cartSummaryText) {
+  const cart = {
+    home: 0,
+    commercial: 0,
+  };
+
+  const updateCartSummary = () => {
+    const parts = [];
+    if (cart.home > 0) {
+      parts.push(`Home: ${cart.home}`);
+    }
+    if (cart.commercial > 0) {
+      parts.push(`Commercial: ${cart.commercial}`);
+    }
+    cartSummaryText.textContent =
+      parts.length > 0 ? `${parts.join(" | ")} (Total: ${cart.home + cart.commercial})` : "No items added yet.";
+  };
+
+  addCartButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const usageType = button.dataset.usageType || "";
+      const card = button.closest(".use-type-card");
+      const qtyInput = card?.querySelector(".order-qty-input");
+      const quantity = Number.parseInt(String(qtyInput?.value || ""), 10);
+
+      if (!["home", "commercial"].includes(usageType) || !Number.isInteger(quantity) || quantity < 1) {
+        return;
+      }
+
+      cart[usageType] += quantity;
+      updateCartSummary();
+
+      if (usageTypeInput && quantityRequiredInput) {
+        const existingQty = Number.parseInt(quantityRequiredInput.value || "0", 10);
+        usageTypeInput.value = usageType;
+        quantityRequiredInput.value = String(
+          (Number.isInteger(existingQty) ? existingQty : 0) + quantity
+        );
+      }
+
+      if (inquiryStatus) {
+        inquiryStatus.textContent = `${quantity} item(s) added to inquiry for ${usageType} use.`;
+        inquiryStatus.classList.remove("error");
+      }
+    });
+  });
+
+  if (clearCartBtn) {
+    clearCartBtn.addEventListener("click", () => {
+      cart.home = 0;
+      cart.commercial = 0;
+      updateCartSummary();
+      if (usageTypeInput && quantityRequiredInput) {
+        usageTypeInput.value = "";
+        quantityRequiredInput.value = "";
+      }
+      if (inquiryStatus) {
+        inquiryStatus.textContent = "Selection cleared.";
+        inquiryStatus.classList.remove("error");
+      }
+    });
+  }
 }
 
 if (inquiryForm && inquiryStatus && inquirySubmitBtn) {

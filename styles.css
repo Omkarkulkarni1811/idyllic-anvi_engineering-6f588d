@@ -318,6 +318,45 @@ h2 {
   line-height: 1.7;
 }
 
+.order-row {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: auto 110px 1fr;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.order-row label {
+  color: #d8e2f7;
+  font-weight: 600;
+}
+
+.order-qty-input {
+  border: 1px solid #2f3f63;
+  background: #090f1e;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+}
+
+.cart-preview {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  border: 1px solid #ffffff1c;
+  border-radius: 14px;
+  padding: 0.75rem 0.9rem;
+  background: #0b1326;
+}
+
+.cart-preview p {
+  margin: 0;
+  color: #cbd6ee;
+}
+
 .card {
   padding: 1.2rem;
   border-radius: 16px;
@@ -711,6 +750,15 @@ h2 {
   .hero-metrics,
   .usage-thumbs {
     grid-template-columns: 1fr;
+  }
+
+  .order-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-preview {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .usage-carousel {

@@ -145,6 +145,20 @@
                 <li>Optimized for regular home kitchens</li>
                 <li>Easy maintenance and space-efficient layout</li>
               </ul>
+              <div class="order-row">
+                <label for="homeQty">Quantity</label>
+                <input
+                  id="homeQty"
+                  type="number"
+                  min="1"
+                  step="1"
+                  value="1"
+                  class="order-qty-input"
+                />
+                <button class="btn btn-primary add-cart-btn" data-usage-type="home" type="button">
+                  Add to Cart
+                </button>
+              </div>
             </article>
             <article class="use-type-card">
               <h3>Commercial Use</h3>
@@ -157,7 +171,31 @@
                 <li>Quantity depends on daily meal volume</li>
                 <li>Heavy-duty usage with stable long-hour performance</li>
               </ul>
+              <div class="order-row">
+                <label for="commercialQty">Quantity</label>
+                <input
+                  id="commercialQty"
+                  type="number"
+                  min="1"
+                  step="1"
+                  value="4"
+                  class="order-qty-input"
+                />
+                <button
+                  class="btn btn-primary add-cart-btn"
+                  data-usage-type="commercial"
+                  type="button"
+                >
+                  Add to Cart
+                </button>
+              </div>
             </article>
+          </div>
+          <div class="cart-preview" id="cartPreview">
+            <p><strong>Selected:</strong> <span id="cartSummaryText">No items added yet.</span></p>
+            <button class="btn btn-secondary" id="clearCartBtn" type="button">
+              Clear Selection
+            </button>
           </div>
         </div>
       </section>
@@ -371,7 +409,7 @@
             <input
               type="number"
               name="quantity_required"
-              placeholder="Required Quantity Count"
+              placeholder="Required Quantity Count (or use Add to Cart above)"
               min="1"
               step="1"
               required
