@@ -35,7 +35,7 @@ with check (
   length(trim(name)) > 0
   and length(trim(phone)) > 0
   and length(trim(address)) > 0
-  and usage_type in ('home', 'commercial', 'mixed')
+  and usage_type in ('home', 'commercial', 'industrial', 'mixed')
   and quantity_required >= 1
   and quantity_required <= 10000
   and length(product_selection) >= 2

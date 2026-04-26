@@ -6,7 +6,7 @@
     <title>Anvi Engineering | Precision Mechanical Products</title>
     <meta
       name="description"
-      content="Anvi Engineering manufactures durable mechanical products including premium Shegdi systems. Discover our design quality, performance, and trust."
+      content="Anvi Engineering manufactures durable mechanical products including premium Shegdi systems and industrial Oil Skimmer machines. Discover our design quality, performance, and trust."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,8 +46,9 @@
             <h1>Mechanical products designed and Manifacturing for modern reliability.</h1>
             <p class="lead">
               From our signature <strong>Shegdi</strong> to upcoming mechanical
-              solutions, Anvi Engineering focuses on performance, safety, and
-              long-term trust for every customer.
+              solutions and <strong>industrial Oil Skimmer</strong> systems, Anvi
+              Engineering focuses on performance, safety, and long-term trust for
+              every customer.
             </p>
             <div class="hero-cta">
               <a href="#products" class="btn btn-primary magnetic">Explore Products</a>
@@ -80,11 +81,11 @@
       <section id="products" class="products section">
         <div class="container">
           <div class="section-head reveal">
-            <p class="eyebrow">Most selling product</p>
-            <h2>Shegdi, refined for real-world usage.</h2>
+            <p class="eyebrow">Most Selling + Industrial Range</p>
+            <h2>Shegdi and Oil Skimmer, built for real-world usage.</h2>
             <p>
-              Durable construction, optimized flame control, and low-maintenance
-              engineering built for daily performance.
+              Durable construction, optimized performance, and low-maintenance
+              engineering for both kitchen and industrial requirements.
             </p>
           </div>
 
@@ -108,6 +109,19 @@
           </div>
 
           <div class="cards reveal">
+            <article class="card featured-industrial-card">
+              <h4>New: Industrial Oil Skimmer</h4>
+              <img
+                class="featured-industrial-image"
+                src="assets/oil-skimmer/oil-skimmer-1.png"
+                onerror="this.onerror=null;this.src='assets/customer-photo.jpeg';"
+                alt="Industrial oil skimmer product"
+              />
+              <p>
+                Industry-use machine for removing floating oil from coolant and
+                process tanks.
+              </p>
+            </article>
             <article class="card">
               <h4>Current Best Seller</h4>
               <p>Customer-demanded Shegdi model with consistent reliability.</p>
@@ -121,6 +135,28 @@
               <p>More precision products are in development and testing.</p>
             </article>
           </div>
+
+          <article class="industrial-product reveal">
+            <p class="product-tag">Industrial Use Only</p>
+            <h3>New Product: Oil Skimmer</h3>
+            <div class="industrial-product-media">
+              <img
+                src="assets/oil-skimmer/oil-skimmer-1.png"
+                onerror="this.onerror=null;this.src='assets/customer-photo.jpeg';"
+                alt="Anvi Engineering industrial oil skimmer machine"
+              />
+            </div>
+            <p>
+              Designed for industrial environments to continuously remove floating
+              oil from coolant tanks and process liquid surfaces.
+            </p>
+            <ul>
+              <li>Supports cleaner coolant and better machine performance</li>
+              <li>Built for long-hour, low-maintenance industrial operation</li>
+              <li>Suitable for workshop and manufacturing line usage</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary magnetic">Request Oil Skimmer Quote</a>
+          </article>
         </div>
       </section>
 
@@ -128,9 +164,9 @@
         <div class="container reveal">
           <div class="section-head">
             <p class="eyebrow">Product Types</p>
-            <h2>Choose the right Shegdi setup for your use.</h2>
+            <h2>Choose the right product setup for your use.</h2>
             <p>
-              We support both home and commercial requirements with practical
+              We support home, commercial, and industrial requirements with practical
               quantity guidance for fast planning.
             </p>
           </div>
@@ -188,6 +224,35 @@
                 </button>
               </div>
             </article>
+            <article class="use-type-card">
+              <h3>Industrial Use (Oil Skimmer)</h3>
+              <p>
+                Designed for factories, workshops, and machining setups to remove
+                floating oil from coolant and process tanks.
+              </p>
+              <ul>
+                <li>Supports cleaner coolant and better machine life</li>
+                <li>Stable operation for continuous industrial use</li>
+              </ul>
+              <div class="order-row">
+                <label for="industrialQty">Quantity</label>
+                <input
+                  id="industrialQty"
+                  type="number"
+                  min="1"
+                  step="1"
+                  value="1"
+                  class="order-qty-input"
+                />
+                <button
+                  class="btn btn-primary add-cart-btn"
+                  data-usage-type="industrial"
+                  type="button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </article>
           </div>
           <button class="cart-fab btn btn-secondary" id="cartToggleBtn" type="button">
             Cart (0)
@@ -214,6 +279,14 @@
                 <button type="button" class="line-btn" data-action="decrease" data-usage="commercial">-</button>
                 <strong id="cartCommercialQty">0</strong>
                 <button type="button" class="line-btn" data-action="increase" data-usage="commercial">+</button>
+              </div>
+            </div>
+            <div class="cart-line" id="cartIndustrialLine">
+              <span>Industrial Use</span>
+              <div class="cart-line-controls">
+                <button type="button" class="line-btn" data-action="decrease" data-usage="industrial">-</button>
+                <strong id="cartIndustrialQty">0</strong>
+                <button type="button" class="line-btn" data-action="increase" data-usage="industrial">+</button>
               </div>
             </div>
             <p class="cart-total">Total Quantity: <strong id="cartTotalQty">0</strong></p>
@@ -409,6 +482,7 @@
             <img class="media-open" src="assets/customer-usage/usage_real_4.jpg" alt="Real usage frame four" />
             <img class="media-open" src="assets/customer-usage/usage_real_5.jpg" alt="Real usage frame five" />
             <img class="media-open" src="assets/customer-usage/usage_real_6.jpg" alt="Real usage frame six" />
+            <img class="media-open" src="assets/oil-skimmer/oil-skimmer-1.png" alt="Industrial oil skimmer machine photo" />
           </div>
         </div>
       </section>
@@ -417,7 +491,7 @@
         <div class="container contact-box reveal">
           <div>
             <p class="eyebrow">Let's build together</p>
-            <h2>Talk to Anvi Engineering for product orders.</h2>
+            <h2>Talk to Anvi Engineering for Shegdi and Oil Skimmer orders.</h2>
             <p>
               Share your requirement and we will help you with the right
               mechanical solution.
@@ -441,7 +515,7 @@
             ></textarea>
             <textarea
               name="requirement"
-              placeholder="Write your requirement (examples: home use for family of 5, need 2 units in Pune, hotel kitchen order with 8 commercial units, custom size request with delivery timeline)."
+              placeholder="Write your requirement (examples: home use for family of 5, need 2 units in Pune, hotel kitchen order with 8 commercial units, or industrial oil skimmer requirement with machine/coolant tank details and delivery timeline)."
               rows="4"
               required
             ></textarea>

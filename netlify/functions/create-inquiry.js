@@ -68,6 +68,7 @@ exports.handler = async (event) => {
     productSelection = {
       home: Number.parseInt(String(parsed?.home || 0), 10) || 0,
       commercial: Number.parseInt(String(parsed?.commercial || 0), 10) || 0,
+      industrial: Number.parseInt(String(parsed?.industrial || 0), 10) || 0,
     };
   } catch {
     return jsonResponse(400, { error: "Invalid product selection" }, origin);
@@ -86,12 +87,13 @@ exports.handler = async (event) => {
     name.length > 120 ||
     phone.length > 40 ||
     address.length > 500 ||
-    !["home", "commercial", "mixed"].includes(usageType) ||
+    !["home", "commercial", "industrial", "mixed"].includes(usageType) ||
     quantityRequired > 10000 ||
     productSelection.home < 0 ||
     productSelection.commercial < 0 ||
-    productSelection.home + productSelection.commercial < 1 ||
-    productSelection.home + productSelection.commercial !== quantityRequired ||
+    productSelection.industrial < 0 ||
+    productSelection.home + productSelection.commercial + productSelection.industrial < 1 ||
+    productSelection.home + productSelection.commercial + productSelection.industrial !== quantityRequired ||
     requirement.length > 4000
   ) {
     return jsonResponse(400, { error: "Input too long" }, origin);

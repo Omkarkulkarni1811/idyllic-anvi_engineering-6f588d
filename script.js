@@ -36,6 +36,7 @@ const cartDrawer = document.getElementById("cartDrawer");
 const cartCloseBtn = document.getElementById("cartCloseBtn");
 const cartHomeQty = document.getElementById("cartHomeQty");
 const cartCommercialQty = document.getElementById("cartCommercialQty");
+const cartIndustrialQty = document.getElementById("cartIndustrialQty");
 const cartTotalQty = document.getElementById("cartTotalQty");
 const cartLineButtons = Array.from(document.querySelectorAll(".line-btn"));
 const inquiryCartSummary = document.getElementById("inquiryCartSummary");
@@ -53,6 +54,12 @@ const ASSET_CDN_BASE =
 
 const resolveAssetUrl = (value) => {
   if (!value || !value.startsWith("assets/")) {
+    return value;
+  }
+  if (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+  ) {
     return value;
   }
   return `${ASSET_CDN_BASE}${value.replace(/^assets\//, "")}`;
@@ -307,14 +314,16 @@ if (addCartButtons.length > 0 && cartSummaryText) {
   const cart = {
     home: 0,
     commercial: 0,
+    industrial: 0,
   };
 
   const updateCartSummary = () => {
-    const total = cart.home + cart.commercial;
+    const total = cart.home + cart.commercial + cart.industrial;
 
-    if (cartHomeQty && cartCommercialQty && cartTotalQty) {
+    if (cartHomeQty && cartCommercialQty && cartIndustrialQty && cartTotalQty) {
       cartHomeQty.textContent = String(cart.home);
       cartCommercialQty.textContent = String(cart.commercial);
+      cartIndustrialQty.textContent = String(cart.industrial);
       cartTotalQty.textContent = String(total);
     }
 
@@ -324,6 +333,9 @@ if (addCartButtons.length > 0 && cartSummaryText) {
     }
     if (cart.commercial > 0) {
       parts.push(`Commercial: ${cart.commercial}`);
+    }
+    if (cart.industrial > 0) {
+      parts.push(`Industrial: ${cart.industrial}`);
     }
     cartSummaryText.textContent =
       parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items added yet.";
@@ -347,12 +359,11 @@ if (addCartButtons.length > 0 && cartSummaryText) {
         quantityRequiredInput.value = "";
         productSelectionInput.value = "{}";
       } else {
+        const activeTypes = Object.entries(cart)
+          .filter(([, qty]) => qty > 0)
+          .map(([type]) => type);
         usageTypeInput.value =
-          cart.home > 0 && cart.commercial > 0
-            ? "mixed"
-            : cart.commercial > 0
-              ? "commercial"
-              : "home";
+          activeTypes.length > 1 ? "mixed" : activeTypes[0] || "";
         quantityRequiredInput.value = String(total);
         productSelectionInput.value = JSON.stringify(cart);
       }
@@ -369,7 +380,7 @@ if (addCartButtons.length > 0 && cartSummaryText) {
         : card?.querySelector(".order-qty-input");
       const quantity = Number.parseInt(String(qtyInput?.value || ""), 10);
 
-      if (!["home", "commercial"].includes(usageType) || !Number.isInteger(quantity) || quantity < 1) {
+      if (!["home", "commercial", "industrial"].includes(usageType) || !Number.isInteger(quantity) || quantity < 1) {
         return;
       }
 
@@ -392,7 +403,7 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       lineButton.addEventListener("click", () => {
         const usage = lineButton.dataset.usage;
         const action = lineButton.dataset.action;
-        if (!usage || !["home", "commercial"].includes(usage)) {
+        if (!usage || !["home", "commercial", "industrial"].includes(usage)) {
           return;
         }
         if (action === "increase") {
@@ -422,6 +433,7 @@ if (addCartButtons.length > 0 && cartSummaryText) {
     clearCartBtn.addEventListener("click", () => {
       cart.home = 0;
       cart.commercial = 0;
+      cart.industrial = 0;
       updateCartSummary();
       if (inquiryStatus) {
         inquiryStatus.textContent = "Selection cleared.";
@@ -432,7 +444,7 @@ if (addCartButtons.length > 0 && cartSummaryText) {
 
   if (applyCartBtn && usageTypeInput && quantityRequiredInput) {
     applyCartBtn.addEventListener("click", () => {
-      const total = cart.home + cart.commercial;
+      const total = cart.home + cart.commercial + cart.industrial;
       if (total < 1) {
         return;
       }
