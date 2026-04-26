@@ -52,16 +52,27 @@ exports.handler = async (event) => {
   const name = String(payload.name || "").trim();
   const phone = String(payload.phone || "").trim();
   const address = String(payload.address || "").trim();
+  const usageType = String(
+    payload.usageType || payload.usage_type || ""
+  ).trim();
+  const quantityRequiredRaw = payload.quantityRequired ?? payload.quantity_required;
+  const quantityRequired = Number.parseInt(String(quantityRequiredRaw || ""), 10);
   const requirement = String(payload.requirement || "").trim();
 
-  if (!name || !phone || !address || !requirement) {
+  if (!name || !phone || !address || !usageType || !requirement) {
     return jsonResponse(400, { error: "All fields are required" }, origin);
+  }
+
+  if (!Number.isInteger(quantityRequired) || quantityRequired < 1) {
+    return jsonResponse(400, { error: "Quantity must be at least 1" }, origin);
   }
 
   if (
     name.length > 120 ||
     phone.length > 40 ||
     address.length > 500 ||
+    !["home", "commercial"].includes(usageType) ||
+    quantityRequired > 10000 ||
     requirement.length > 4000
   ) {
     return jsonResponse(400, { error: "Input too long" }, origin);
@@ -81,6 +92,8 @@ exports.handler = async (event) => {
           name,
           phone,
           address,
+          usage_type: usageType,
+          quantity_required: quantityRequired,
           requirement,
           source: "website",
         },

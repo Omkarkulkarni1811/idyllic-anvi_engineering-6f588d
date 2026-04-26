@@ -292,10 +292,23 @@ if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
       name: String(formData.get("name") || "").trim(),
       phone: String(formData.get("phone") || "").trim(),
       address: String(formData.get("address") || "").trim(),
+      usageType: String(formData.get("usage_type") || "").trim(),
+      quantityRequired: Number.parseInt(
+        String(formData.get("quantity_required") || ""),
+        10
+      ),
       requirement: String(formData.get("requirement") || "").trim(),
     };
 
-    if (!payload.name || !payload.phone || !payload.address || !payload.requirement) {
+    if (
+      !payload.name ||
+      !payload.phone ||
+      !payload.address ||
+      !payload.usageType ||
+      !payload.requirement ||
+      !Number.isInteger(payload.quantityRequired) ||
+      payload.quantityRequired < 1
+    ) {
       inquiryStatus.textContent = "Please fill all fields before submitting.";
       inquiryStatus.classList.add("error");
       return;

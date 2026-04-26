@@ -124,6 +124,44 @@
         </div>
       </section>
 
+      <section class="use-types section">
+        <div class="container reveal">
+          <div class="section-head">
+            <p class="eyebrow">Product Types</p>
+            <h2>Choose the right Shegdi setup for your use.</h2>
+            <p>
+              We support both home and commercial requirements with practical
+              quantity guidance for fast planning.
+            </p>
+          </div>
+          <div class="use-types-grid">
+            <article class="use-type-card">
+              <h3>Home Use</h3>
+              <p>
+                Best for daily family cooking with compact and efficient setup.
+              </p>
+              <ul>
+                <li>Recommended quantity: 1 to 2 units</li>
+                <li>Optimized for regular home kitchens</li>
+                <li>Easy maintenance and space-efficient layout</li>
+              </ul>
+            </article>
+            <article class="use-type-card">
+              <h3>Commercial Use</h3>
+              <p>
+                Designed for higher usage volume in hotels, canteens, and
+                catering kitchens.
+              </p>
+              <ul>
+                <li>Recommended quantity: 4 to 20+ units</li>
+                <li>Quantity depends on daily meal volume</li>
+                <li>Heavy-duty usage with stable long-hour performance</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section id="about" class="about section">
         <div class="container about-grid reveal">
           <div>
@@ -325,6 +363,19 @@
           <form class="contact-form" id="inquiryForm">
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="tel" name="phone" placeholder="Mobile Number" required />
+            <select name="usage_type" required>
+              <option value="">Select Usage Type</option>
+              <option value="home">Home Use</option>
+              <option value="commercial">Commercial Use</option>
+            </select>
+            <input
+              type="number"
+              name="quantity_required"
+              placeholder="Required Quantity Count"
+              min="1"
+              step="1"
+              required
+            />
             <textarea
               name="address"
               placeholder="Your Address"

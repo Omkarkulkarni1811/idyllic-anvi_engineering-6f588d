@@ -3,6 +3,8 @@ create table if not exists public.inquiries (
   name text not null,
   phone text not null,
   address text not null,
+  usage_type text not null default 'home',
+  quantity_required integer not null default 1,
   requirement text not null,
   source text default 'website',
   created_at timestamptz not null default now()
@@ -10,6 +12,10 @@ create table if not exists public.inquiries (
 
 alter table public.inquiries
 add column if not exists address text not null default '';
+alter table public.inquiries
+add column if not exists usage_type text not null default 'home';
+alter table public.inquiries
+add column if not exists quantity_required integer not null default 1;
 
 alter table public.inquiries enable row level security;
 
@@ -26,6 +32,9 @@ with check (
   length(trim(name)) > 0
   and length(trim(phone)) > 0
   and length(trim(address)) > 0
+  and usage_type in ('home', 'commercial')
+  and quantity_required >= 1
+  and quantity_required <= 10000
   and length(trim(requirement)) > 0
   and length(name) <= 120
   and length(phone) <= 40

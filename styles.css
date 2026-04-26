@@ -289,6 +289,35 @@ h2 {
   gap: 1rem;
 }
 
+.use-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.use-type-card {
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid #ffffff1c;
+  background: var(--card);
+}
+
+.use-type-card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.use-type-card p {
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+}
+
+.use-type-card ul {
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .card {
   padding: 1.2rem;
   border-radius: 16px;
@@ -587,6 +616,7 @@ h2 {
 }
 
 .contact-form input,
+.contact-form select,
 .contact-form textarea {
   width: 100%;
   border: 1px solid #2f3f63;
@@ -595,6 +625,10 @@ h2 {
   border-radius: 12px;
   padding: 0.8rem 0.9rem;
   font: inherit;
+}
+
+.contact-form select {
+  appearance: none;
 }
 
 .contact-form button:disabled {
@@ -673,6 +707,7 @@ h2 {
   }
 
   .cards,
+  .use-types-grid,
   .hero-metrics,
   .usage-thumbs {
     grid-template-columns: 1fr;
