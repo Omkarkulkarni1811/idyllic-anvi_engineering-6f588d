@@ -48,6 +48,9 @@ const quantityRequiredInput = inquiryForm?.querySelector(
 const productSelectionInput = inquiryForm?.querySelector(
   'input[name="product_selection"]'
 );
+const brokerForm = document.getElementById("brokerForm");
+const brokerStatus = document.getElementById("brokerStatus");
+const brokerSubmitBtn = document.getElementById("brokerSubmitBtn");
 
 const ASSET_CDN_BASE =
   "https://cdn.jsdelivr.net/gh/Omkarkulkarni1811/idyllic-anvi_engineering-6f588d@main/assets/";
@@ -527,6 +530,64 @@ if (inquiryForm && inquiryStatus && inquirySubmitBtn) {
       inquiryStatus.classList.add("error");
     } finally {
       inquirySubmitBtn.disabled = false;
+    }
+  });
+}
+
+if (brokerForm && brokerStatus && brokerSubmitBtn) {
+  brokerForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(brokerForm);
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      phone: String(formData.get("phone") || "").trim(),
+      city: String(formData.get("city") || "").trim(),
+      experience: String(formData.get("experience") || "").trim(),
+      products: String(formData.get("products") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+    };
+
+    if (
+      !payload.name ||
+      !payload.phone ||
+      !payload.city ||
+      !payload.experience ||
+      !payload.products
+    ) {
+      brokerStatus.textContent = "Please fill all required broker details.";
+      brokerStatus.classList.add("error");
+      return;
+    }
+
+    brokerSubmitBtn.disabled = true;
+    brokerStatus.textContent = "Submitting broker details...";
+    brokerStatus.classList.remove("error");
+
+    try {
+      const response = await fetch("/.netlify/functions/create-broker-lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || "Failed to save broker details");
+      }
+
+      brokerForm.reset();
+      brokerStatus.textContent =
+        "Thank you! Broker details submitted successfully. We will contact you shortly.";
+      brokerStatus.classList.remove("error");
+    } catch (error) {
+      brokerStatus.textContent =
+        "Broker details could not be submitted right now. Please try again shortly.";
+      brokerStatus.classList.add("error");
+    } finally {
+      brokerSubmitBtn.disabled = false;
     }
   });
 }

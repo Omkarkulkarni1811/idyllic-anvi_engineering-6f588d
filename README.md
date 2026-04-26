@@ -28,5 +28,7 @@ extension (like Live Server) and open the site from there.
    - `SUPABASE_SERVICE_ROLE_KEY` = your Supabase service role key (recommended), or
    - `SUPABASE_PUBLISHABLE_KEY` = your Supabase publishable key
 4. Deploy the site on Netlify.  
-   The contact form now posts to `/.netlify/functions/create-inquiry` and stores
-   entries in `public.inquiries`.
+   - Customer inquiry form posts to `/.netlify/functions/create-inquiry` and stores
+     entries in `public.inquiries`.
+   - Broker partner form posts to `/.netlify/functions/create-broker-lead` and stores
+     entries in `public.broker_leads`.
