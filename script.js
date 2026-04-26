@@ -29,7 +29,15 @@ const inquiryStatus = document.getElementById("inquiryStatus");
 const inquirySubmitBtn = document.getElementById("inquirySubmitBtn");
 const addCartButtons = Array.from(document.querySelectorAll(".add-cart-btn"));
 const clearCartBtn = document.getElementById("clearCartBtn");
+const applyCartBtn = document.getElementById("applyCartBtn");
 const cartSummaryText = document.getElementById("cartSummaryText");
+const cartToggleBtn = document.getElementById("cartToggleBtn");
+const cartDrawer = document.getElementById("cartDrawer");
+const cartCloseBtn = document.getElementById("cartCloseBtn");
+const cartHomeQty = document.getElementById("cartHomeQty");
+const cartCommercialQty = document.getElementById("cartCommercialQty");
+const cartTotalQty = document.getElementById("cartTotalQty");
+const cartLineButtons = Array.from(document.querySelectorAll(".line-btn"));
 const usageTypeInput = inquiryForm?.querySelector('select[name="usage_type"]');
 const quantityRequiredInput = inquiryForm?.querySelector(
   'input[name="quantity_required"]'
@@ -297,6 +305,12 @@ if (addCartButtons.length > 0 && cartSummaryText) {
   };
 
   const updateCartSummary = () => {
+    if (cartHomeQty && cartCommercialQty && cartTotalQty) {
+      cartHomeQty.textContent = String(cart.home);
+      cartCommercialQty.textContent = String(cart.commercial);
+      cartTotalQty.textContent = String(cart.home + cart.commercial);
+    }
+
     const parts = [];
     if (cart.home > 0) {
       parts.push(`Home: ${cart.home}`);
@@ -306,6 +320,10 @@ if (addCartButtons.length > 0 && cartSummaryText) {
     }
     cartSummaryText.textContent =
       parts.length > 0 ? `${parts.join(" | ")} (Total: ${cart.home + cart.commercial})` : "No items added yet.";
+
+    if (cartToggleBtn) {
+      cartToggleBtn.textContent = `Cart (${cart.home + cart.commercial})`;
+    }
   };
 
   addCartButtons.forEach((button) => {
@@ -322,20 +340,47 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       cart[usageType] += quantity;
       updateCartSummary();
 
-      if (usageTypeInput && quantityRequiredInput) {
-        const existingQty = Number.parseInt(quantityRequiredInput.value || "0", 10);
-        usageTypeInput.value = usageType;
-        quantityRequiredInput.value = String(
-          (Number.isInteger(existingQty) ? existingQty : 0) + quantity
-        );
-      }
-
       if (inquiryStatus) {
         inquiryStatus.textContent = `${quantity} item(s) added to inquiry for ${usageType} use.`;
         inquiryStatus.classList.remove("error");
       }
+
+      if (cartDrawer) {
+        cartDrawer.setAttribute("aria-hidden", "false");
+      }
     });
   });
+
+  if (cartLineButtons.length > 0) {
+    cartLineButtons.forEach((lineButton) => {
+      lineButton.addEventListener("click", () => {
+        const usage = lineButton.dataset.usage;
+        const action = lineButton.dataset.action;
+        if (!usage || !["home", "commercial"].includes(usage)) {
+          return;
+        }
+        if (action === "increase") {
+          cart[usage] += 1;
+        } else if (action === "decrease") {
+          cart[usage] = Math.max(0, cart[usage] - 1);
+        }
+        updateCartSummary();
+      });
+    });
+  }
+
+  if (cartToggleBtn && cartDrawer) {
+    cartToggleBtn.addEventListener("click", () => {
+      const isHidden = cartDrawer.getAttribute("aria-hidden") === "true";
+      cartDrawer.setAttribute("aria-hidden", isHidden ? "false" : "true");
+    });
+  }
+
+  if (cartCloseBtn && cartDrawer) {
+    cartCloseBtn.addEventListener("click", () => {
+      cartDrawer.setAttribute("aria-hidden", "true");
+    });
+  }
 
   if (clearCartBtn) {
     clearCartBtn.addEventListener("click", () => {
@@ -352,6 +397,22 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       }
     });
   }
+
+  if (applyCartBtn && usageTypeInput && quantityRequiredInput) {
+    applyCartBtn.addEventListener("click", () => {
+      const total = cart.home + cart.commercial;
+      if (total < 1) {
+        return;
+      }
+      usageTypeInput.value = cart.commercial > 0 ? "commercial" : "home";
+      quantityRequiredInput.value = String(total);
+      inquiryStatus.textContent = `Cart applied to inquiry. Total quantity: ${total}.`;
+      inquiryStatus.classList.remove("error");
+      inquiryForm?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
+
+  updateCartSummary();
 }
 
 if (inquiryForm && inquiryStatus && inquirySubmitBtn) {

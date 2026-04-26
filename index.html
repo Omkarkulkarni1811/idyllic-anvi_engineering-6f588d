@@ -191,12 +191,39 @@
               </div>
             </article>
           </div>
-          <div class="cart-preview" id="cartPreview">
-            <p><strong>Selected:</strong> <span id="cartSummaryText">No items added yet.</span></p>
-            <button class="btn btn-secondary" id="clearCartBtn" type="button">
-              Clear Selection
-            </button>
-          </div>
+          <button class="cart-fab btn btn-secondary" id="cartToggleBtn" type="button">
+            Cart (0)
+          </button>
+          <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+            <div class="cart-drawer-head">
+              <h3>Your Selection</h3>
+              <button class="cart-close-btn" id="cartCloseBtn" type="button" aria-label="Close cart">
+                ×
+              </button>
+            </div>
+            <p class="cart-summary-line" id="cartSummaryText">No items added yet.</p>
+            <div class="cart-line" id="cartHomeLine">
+              <span>Home Use</span>
+              <div class="cart-line-controls">
+                <button type="button" class="line-btn" data-action="decrease" data-usage="home">-</button>
+                <strong id="cartHomeQty">0</strong>
+                <button type="button" class="line-btn" data-action="increase" data-usage="home">+</button>
+              </div>
+            </div>
+            <div class="cart-line" id="cartCommercialLine">
+              <span>Commercial Use</span>
+              <div class="cart-line-controls">
+                <button type="button" class="line-btn" data-action="decrease" data-usage="commercial">-</button>
+                <strong id="cartCommercialQty">0</strong>
+                <button type="button" class="line-btn" data-action="increase" data-usage="commercial">+</button>
+              </div>
+            </div>
+            <p class="cart-total">Total Quantity: <strong id="cartTotalQty">0</strong></p>
+            <div class="cart-actions">
+              <button class="btn btn-secondary" id="clearCartBtn" type="button">Clear</button>
+              <button class="btn btn-primary" id="applyCartBtn" type="button">Use In Inquiry</button>
+            </div>
+          </aside>
         </div>
       </section>
 
