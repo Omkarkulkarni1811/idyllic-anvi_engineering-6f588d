@@ -33,8 +33,8 @@
             <li><a href="#industrial">Industrial</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
-            <li><a href="#broker">Brokers</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="#broker">Brokers</a></li>
           </ul>
         </nav>
       </div>
@@ -490,6 +490,46 @@
         </div>
       </section>
 
+      <section id="contact" class="contact section">
+        <div class="container contact-box reveal">
+          <div>
+            <p class="eyebrow">Let's build together</p>
+            <h2>Talk to Anvi Engineering for Shegdi and Oil Skimmer orders.</h2>
+            <p>
+              Share your kitchen or industrial requirement and we will help you
+              with the right mechanical solution.
+            </p>
+          </div>
+          <form class="contact-form" id="inquiryForm">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="tel" name="phone" placeholder="Mobile Number" required />
+            <p class="order-builder-summary">
+              <strong id="inquiryCartSummary">No items selected yet.</strong>
+              <a class="text-link" id="scrollToCartLink" href="#orderCartSection">Go to top cart</a>
+            </p>
+            <input type="hidden" name="usage_type" value="" />
+            <input type="hidden" name="quantity_required" value="" />
+            <input type="hidden" name="product_selection" value="{}" />
+            <textarea
+              name="address"
+              placeholder="Your Address"
+              rows="3"
+              required
+            ></textarea>
+            <textarea
+              name="requirement"
+              placeholder="Write your requirement (examples: home use for family of 5, need 2 units in Pune, hotel kitchen order with 8 commercial units, or industrial oil skimmer requirement with machine/coolant tank details and delivery timeline)."
+              rows="4"
+              required
+            ></textarea>
+            <button class="btn btn-primary magnetic" id="inquirySubmitBtn" type="submit">
+              Send Inquiry
+            </button>
+            <p id="inquiryStatus" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
       <section id="broker" class="broker section">
         <div class="container contact-box reveal">
           <div>
@@ -530,46 +570,6 @@
               Submit Broker Details
             </button>
             <p id="brokerStatus" class="form-status" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </section>
-
-      <section id="contact" class="contact section">
-        <div class="container contact-box reveal">
-          <div>
-            <p class="eyebrow">Let's build together</p>
-            <h2>Talk to Anvi Engineering for Shegdi and Oil Skimmer orders.</h2>
-            <p>
-              Share your kitchen or industrial requirement and we will help you
-              with the right mechanical solution.
-            </p>
-          </div>
-          <form class="contact-form" id="inquiryForm">
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="tel" name="phone" placeholder="Mobile Number" required />
-            <p class="order-builder-summary">
-              <strong id="inquiryCartSummary">No items selected yet.</strong>
-              <a class="text-link" id="scrollToCartLink" href="#orderCartSection">Go to top cart</a>
-            </p>
-            <input type="hidden" name="usage_type" value="" />
-            <input type="hidden" name="quantity_required" value="" />
-            <input type="hidden" name="product_selection" value="{}" />
-            <textarea
-              name="address"
-              placeholder="Your Address"
-              rows="3"
-              required
-            ></textarea>
-            <textarea
-              name="requirement"
-              placeholder="Write your requirement (examples: home use for family of 5, need 2 units in Pune, hotel kitchen order with 8 commercial units, or industrial oil skimmer requirement with machine/coolant tank details and delivery timeline)."
-              rows="4"
-              required
-            ></textarea>
-            <button class="btn btn-primary magnetic" id="inquirySubmitBtn" type="submit">
-              Send Inquiry
-            </button>
-            <p id="inquiryStatus" class="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </section>
