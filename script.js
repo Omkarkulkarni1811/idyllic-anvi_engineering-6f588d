@@ -45,8 +45,6 @@ const quantityRequiredInput = inquiryForm?.querySelector(
 const productSelectionInput = inquiryForm?.querySelector(
   'input[name="product_selection"]'
 );
-const formCartSummary = document.getElementById("formCartSummary");
-const clearFormCartBtn = document.getElementById("clearFormCartBtn");
 
 const ASSET_CDN_BASE =
   "https://cdn.jsdelivr.net/gh/Omkarkulkarni1811/idyllic-anvi_engineering-6f588d@main/assets/";
@@ -332,11 +330,6 @@ if (addCartButtons.length > 0 && cartSummaryText) {
       cartToggleBtn.textContent = `Cart (${total})`;
     }
 
-    if (formCartSummary) {
-      formCartSummary.textContent =
-        parts.length > 0 ? `${parts.join(" | ")} (Total: ${total})` : "No items selected.";
-    }
-
     if (usageTypeInput && quantityRequiredInput && productSelectionInput) {
       if (total < 1) {
         usageTypeInput.value = "";
@@ -416,18 +409,6 @@ if (addCartButtons.length > 0 && cartSummaryText) {
 
   if (clearCartBtn) {
     clearCartBtn.addEventListener("click", () => {
-      cart.home = 0;
-      cart.commercial = 0;
-      updateCartSummary();
-      if (inquiryStatus) {
-        inquiryStatus.textContent = "Selection cleared.";
-        inquiryStatus.classList.remove("error");
-      }
-    });
-  }
-
-  if (clearFormCartBtn) {
-    clearFormCartBtn.addEventListener("click", () => {
       cart.home = 0;
       cart.commercial = 0;
       updateCartSummary();

@@ -428,53 +428,9 @@
           <form class="contact-form" id="inquiryForm">
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="tel" name="phone" placeholder="Mobile Number" required />
-            <div class="inquiry-order-builder">
-              <p class="order-builder-title">Select Product & Quantity (Add to Cart)</p>
-              <div class="order-row form-order-row">
-                <label for="formHomeQty">Home Use</label>
-                <input
-                  id="formHomeQty"
-                  type="number"
-                  min="1"
-                  step="1"
-                  value="1"
-                  class="order-qty-input"
-                />
-                <button
-                  class="btn btn-primary add-cart-btn"
-                  data-usage-type="home"
-                  data-qty-input-id="formHomeQty"
-                  type="button"
-                >
-                  Add to Cart
-                </button>
-              </div>
-              <div class="order-row form-order-row">
-                <label for="formCommercialQty">Commercial Use</label>
-                <input
-                  id="formCommercialQty"
-                  type="number"
-                  min="1"
-                  step="1"
-                  value="4"
-                  class="order-qty-input"
-                />
-                <button
-                  class="btn btn-primary add-cart-btn"
-                  data-usage-type="commercial"
-                  data-qty-input-id="formCommercialQty"
-                  type="button"
-                >
-                  Add to Cart
-                </button>
-              </div>
-              <p class="order-builder-summary">
-                Cart in inquiry: <strong id="formCartSummary">No items selected.</strong>
-              </p>
-              <button class="btn btn-secondary" id="clearFormCartBtn" type="button">
-                Clear Cart
-              </button>
-            </div>
+            <p class="order-builder-summary">
+              Use product selection from the top section cart before submitting inquiry.
+            </p>
             <input type="hidden" name="usage_type" value="" />
             <input type="hidden" name="quantity_required" value="" />
             <input type="hidden" name="product_selection" value="{}" />
