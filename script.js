@@ -21,9 +21,7 @@ const experienceVideoWraps = Array.from(
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const lightboxClose = document.getElementById("lightboxClose");
-const forcedMutedVideos = document.querySelectorAll(
-  '#experience video[data-force-muted="true"]'
-);
+const forcedMutedVideos = document.querySelectorAll("video");
 const inquiryForm = document.getElementById("inquiryForm");
 const inquiryStatus = document.getElementById("inquiryStatus");
 const inquirySubmitBtn = document.getElementById("inquirySubmitBtn");
@@ -127,9 +125,9 @@ const translations = {
     languageModalHint: "पूरी वेबसाइट देखने के लिए एक विकल्प चुनें।",
     nav: ["प्रोडक्ट्स", "इंडस्ट्रियल", "हमारे बारे में", "अनुभव", "संपर्क", "ब्रोकर"],
     heroEyebrow: "भारत में सटीकता के साथ निर्मित",
-    heroTitle: "आधुनिक विश्वसनीयता के लिए डिज़ाइन और निर्मित मैकेनिकल प्रोडक्ट्स।",
+    heroTitle: "आधुनिक विश्वसनीयता के लिए डिज़ाइन और निर्मित मैकेनिकल उत्पाद।",
     heroLead:
-      "हमारी भरोसेमंद <strong>शेगडी</strong> से लेकर नई मैकेनिकल सॉल्यूशंस और <strong>इंडस्ट्रियल ऑयल स्किमर</strong> सिस्टम तक, अन्वी इंजीनियरिंग हर ग्राहक के लिए परफॉर्मेंस, सेफ्टी और लंबे भरोसे पर ध्यान देती है।",
+      "हमारी विश्वसनीय <strong>शेगडी</strong> से लेकर नए मैकेनिकल समाधानों और <strong>इंडस्ट्रियल ऑयल स्किमर</strong> सिस्टम तक, अन्वी इंजीनियरिंग हर ग्राहक के लिए प्रदर्शन, सुरक्षा और दीर्घकालिक विश्वास को प्राथमिकता देती है।",
     heroCtas: ["प्रोडक्ट देखें", "डेमो देखें"],
     metricTexts: [
       "मुख्य प्रोडक्ट लाइनें: शेगडी और ऑयल स्किमर",
@@ -253,8 +251,8 @@ const applyLanguage = (lang) => {
 
   languageOptionButtons.forEach((button) => {
     if (button.dataset.lang === "en") button.textContent = "English";
-    if (button.dataset.lang === "hi") button.textContent = "Hindi";
-    if (button.dataset.lang === "mr") button.textContent = "Marathi";
+    if (button.dataset.lang === "hi") button.textContent = "हिंदी";
+    if (button.dataset.lang === "mr") button.textContent = "मराठी";
   });
 
   const navLinks = Array.from(document.querySelectorAll("#navMenu a"));
@@ -1087,7 +1085,7 @@ metricNumbers.forEach((el) => countObserver.observe(el));
 forcedMutedVideos.forEach((video) => {
   video.muted = true;
   video.volume = 0;
-  // Keep experience videos silent even if controls are used.
+  // Keep all site videos silent even if controls are used.
   video.addEventListener("volumechange", () => {
     if (!video.muted || video.volume !== 0) {
       video.muted = true;
