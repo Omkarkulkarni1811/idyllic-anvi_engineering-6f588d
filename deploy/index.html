@@ -21,6 +21,26 @@
     <div class="bg-orb orb-1" aria-hidden="true"></div>
     <div class="bg-orb orb-2" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
+    <button id="languageOpenBtn" class="language-open-btn" type="button">
+      <span id="languageTriggerLabel">Language</span>
+    </button>
+    <div id="languageModal" class="language-modal" aria-hidden="true">
+      <div class="language-modal-card">
+        <h2 id="languageModalTitle">Choose your language</h2>
+        <p id="languageModalHint">Select one option to view the full website.</p>
+        <div class="language-options">
+          <button class="btn btn-primary language-option" data-lang="en" type="button">
+            English
+          </button>
+          <button class="btn btn-primary language-option" data-lang="hi" type="button">
+            Hindi
+          </button>
+          <button class="btn btn-primary language-option" data-lang="mr" type="button">
+            Marathi
+          </button>
+        </div>
+      </div>
+    </div>
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="#home">Anvi Engineering</a>
