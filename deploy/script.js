@@ -71,7 +71,7 @@ const translations = {
     languageLabel: "Language",
     languageModalTitle: "Choose your language",
     languageModalHint: "Select one option to view the full website.",
-    nav: ["Products", "Industrial", "About", "Experience", "Contact", "Brokers"],
+    nav: ["Products", "Industrial", "About", "Experience", "Contact", "Sales Partner"],
     heroEyebrow: "Built in India with precision",
     heroTitle: "Mechanical products designed and manufacturing for modern reliability.",
     heroLead:
@@ -108,12 +108,12 @@ const translations = {
       inquirySuccess: "Thank you! Inquiry submitted successfully. We will contact you soon.",
       inquiryFail:
         "Inquiry could not be submitted right now. Please try again in a minute.",
-      fillBroker: "Please fill all required broker details.",
-      sendingBroker: "Submitting broker details...",
+      fillBroker: "Please fill all required sales partner details.",
+      sendingBroker: "Submitting sales partner details...",
       brokerSuccess:
-        "Thank you! Broker details submitted successfully. We will contact you shortly.",
+        "Thank you! Sales partner details submitted successfully. We will contact you shortly.",
       brokerFail:
-        "Broker details could not be submitted right now. Please try again shortly.",
+        "Sales partner details could not be submitted right now. Please try again shortly.",
     },
   },
   hi: {
@@ -123,7 +123,7 @@ const translations = {
     languageLabel: "भाषा",
     languageModalTitle: "अपनी भाषा चुनें",
     languageModalHint: "पूरी वेबसाइट देखने के लिए एक विकल्प चुनें।",
-    nav: ["प्रोडक्ट्स", "इंडस्ट्रियल", "हमारे बारे में", "अनुभव", "संपर्क", "ब्रोकर"],
+    nav: ["प्रोडक्ट्स", "इंडस्ट्रियल", "हमारे बारे में", "अनुभव", "संपर्क", "सेल्स पार्टनर"],
     heroEyebrow: "भारत में सटीकता के साथ निर्मित",
     heroTitle: "आधुनिक विश्वसनीयता के लिए डिज़ाइन और निर्मित मैकेनिकल उत्पाद।",
     heroLead:
@@ -160,11 +160,11 @@ const translations = {
       inquirySuccess: "धन्यवाद! आपकी पूछताछ सफलतापूर्वक भेज दी गई है।",
       inquiryFail:
         "अभी पूछताछ सबमिट नहीं हो पाई। कृपया एक मिनट बाद पुनः प्रयास करें।",
-      fillBroker: "कृपया ब्रोकर की सभी जरूरी जानकारी भरें।",
-      sendingBroker: "ब्रोकर जानकारी भेजी जा रही है...",
-      brokerSuccess: "धन्यवाद! आपकी ब्रोकर जानकारी सफलतापूर्वक सबमिट हो गई है।",
+      fillBroker: "कृपया सेल्स पार्टनर की सभी जरूरी जानकारी भरें।",
+      sendingBroker: "सेल्स पार्टनर जानकारी भेजी जा रही है...",
+      brokerSuccess: "धन्यवाद! आपकी सेल्स पार्टनर जानकारी सफलतापूर्वक सबमिट हो गई है।",
       brokerFail:
-        "अभी ब्रोकर जानकारी सबमिट नहीं हो पाई। कृपया एक मिनट बाद पुनः प्रयास करें।",
+        "अभी सेल्स पार्टनर जानकारी सबमिट नहीं हो पाई। कृपया एक मिनट बाद पुनः प्रयास करें।",
     },
   },
   mr: {
@@ -174,7 +174,7 @@ const translations = {
     languageLabel: "भाषा",
     languageModalTitle: "तुमची भाषा निवडा",
     languageModalHint: "पूर्ण वेबसाइट पाहण्यासाठी एक पर्याय निवडा.",
-    nav: ["प्रॉडक्ट्स", "इंडस्ट्रियल", "आमच्याबद्दल", "अनुभव", "संपर्क", "ब्रोकर"],
+    nav: ["प्रॉडक्ट्स", "इंडस्ट्रियल", "आमच्याबद्दल", "अनुभव", "संपर्क", "सेल्स पार्टनर"],
     heroEyebrow: "अचूकतेसह भारतात निर्मित",
     heroTitle: "आधुनिक विश्वासार्हतेसाठी डिझाइन व निर्मित केलेली यांत्रिक उत्पादने.",
     heroLead:
@@ -210,10 +210,10 @@ const translations = {
       sendingInquiry: "चौकशी पाठवली जात आहे...",
       inquirySuccess: "धन्यवाद! तुमची चौकशी यशस्वीरीत्या सबमिट झाली आहे.",
       inquiryFail: "आत्ता चौकशी सबमिट होऊ शकली नाही. कृपया एक मिनिटानंतर पुन्हा प्रयत्न करा.",
-      fillBroker: "कृपया ब्रोकरची सर्व आवश्यक माहिती भरा.",
-      sendingBroker: "ब्रोकर तपशील पाठवले जात आहेत...",
-      brokerSuccess: "धन्यवाद! ब्रोकर तपशील यशस्वीरीत्या सबमिट झाले आहेत.",
-      brokerFail: "आत्ता ब्रोकर तपशील सबमिट होऊ शकले नाहीत. कृपया एक मिनिटानंतर पुन्हा प्रयत्न करा.",
+      fillBroker: "कृपया सेल्स पार्टनरची सर्व आवश्यक माहिती भरा.",
+      sendingBroker: "सेल्स पार्टनर तपशील पाठवले जात आहेत...",
+      brokerSuccess: "धन्यवाद! सेल्स पार्टनर तपशील यशस्वीरीत्या सबमिट झाले आहेत.",
+      brokerFail: "आत्ता सेल्स पार्टनर तपशील सबमिट होऊ शकले नाहीत. कृपया एक मिनिटानंतर पुन्हा प्रयत्न करा.",
     },
   },
 };
@@ -587,26 +587,26 @@ const applyLanguage = (lang) => {
   if (allMediaEyebrow) {
     allMediaEyebrow.textContent =
       selectedLang === "en"
-        ? "Complete Media Collection"
+        ? ""
         : selectedLang === "hi"
-          ? "पूर्ण मीडिया संग्रह"
-          : "संपूर्ण मीडिया संग्रह";
+          ? ""
+          : "";
   }
   if (allMediaTitle) {
     allMediaTitle.textContent =
       selectedLang === "en"
-        ? "All photos and videos shared by you."
+        ? ""
         : selectedLang === "hi"
-          ? "आपके द्वारा साझा सभी फ़ोटो और वीडियो।"
-          : "तुमच्याकडून शेअर केलेले सर्व फोटो आणि व्हिडिओ.";
+          ? ""
+          : "";
   }
   if (allMediaLead) {
     allMediaLead.textContent =
       selectedLang === "en"
-        ? "This section now uses only approved, non-repeated product photos."
+        ? ""
         : selectedLang === "hi"
-          ? "इस सेक्शन में अब केवल स्वीकृत और बिना दोहराव वाले प्रोडक्ट फ़ोटो का उपयोग किया गया है।"
-          : "या सेक्शनमध्ये आता फक्त मान्यताप्राप्त आणि पुनरावृत्ती नसलेले प्रॉडक्ट फोटो वापरले आहेत.";
+          ? ""
+          : "";
   }
 
   const productTypesHead = document.querySelector("#orderCartSection .section-head h2");
@@ -787,18 +787,18 @@ const applyLanguage = (lang) => {
   if (brokerEyebrow) {
     brokerEyebrow.textContent =
       selectedLang === "en"
-        ? "Broker Partner Network"
+        ? "Sales Partner Network"
         : selectedLang === "hi"
-          ? "ब्रोकर पार्टनर नेटवर्क"
-          : "ब्रोकर पार्टनर नेटवर्क";
+          ? "सेल्स पार्टनर नेटवर्क"
+          : "सेल्स पार्टनर नेटवर्क";
   }
   if (brokerTitle && selectedLang !== "en") {
     brokerTitle.textContent =
       selectedLang === "hi"
-        ? "शेगडी और ऑयल स्किमर बेचने के लिए ब्रोकर के रूप में जुड़ें।"
-        : "शेगडी आणि ऑईल स्किमर विक्रीसाठी ब्रोकर म्हणून सहभागी व्हा.";
+        ? "शेगडी और ऑयल स्किमर बेचने के लिए सेल्स पार्टनर के रूप में जुड़ें।"
+        : "शेगडी आणि ऑईल स्किमर विक्रीसाठी सेल्स पार्टनर म्हणून सहभागी व्हा.";
   } else if (brokerTitle) {
-    brokerTitle.textContent = "Join as a broker to sell Shegdi and Oil Skimmer.";
+    brokerTitle.textContent = "Join as a sales partner to sell Shegdi and Oil Skimmer.";
   }
   if (brokerLead) {
     brokerLead.textContent =
@@ -810,7 +810,7 @@ const applyLanguage = (lang) => {
   }
   if (brokerName) {
     brokerName.placeholder =
-      selectedLang === "en" ? "Broker Name" : selectedLang === "hi" ? "ब्रोकर का नाम" : "ब्रोकरचे नाव";
+      selectedLang === "en" ? "Sales Partner Name" : selectedLang === "hi" ? "सेल्स पार्टनर का नाम" : "सेल्स पार्टनरचे नाव";
   }
   if (brokerPhone) {
     brokerPhone.placeholder =
@@ -855,10 +855,10 @@ const applyLanguage = (lang) => {
   if (brokerSubmitBtn) {
     brokerSubmitBtn.textContent =
       selectedLang === "en"
-        ? "Submit Broker Details"
+        ? "Submit Sales Partner Details"
         : selectedLang === "hi"
-          ? "ब्रोकर जानकारी सबमिट करें"
-          : "ब्रोकर तपशील सबमिट करा";
+          ? "सेल्स पार्टनर जानकारी सबमिट करें"
+          : "सेल्स पार्टनर तपशील सबमिट करा";
   }
 
   const usageThumbsLocal = Array.from(document.querySelectorAll("#usageThumbs .thumb"));
@@ -1485,7 +1485,7 @@ if (brokerForm && brokerStatus && brokerSubmitBtn) {
 
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        throw new Error(result.error || "Failed to save broker details");
+        throw new Error(result.error || "Failed to save sales partner details");
       }
 
       brokerForm.reset();
